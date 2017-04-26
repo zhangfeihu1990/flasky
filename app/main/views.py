@@ -20,8 +20,10 @@ def index():
                     author=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()
-        return redirect(url_for('.index'))
+        #return redirect(url_for('.index'))
     posts = Post.query.order_by(Post.timestamp.desc()).all()
+    for post in posts:
+        print post.body
     print posts
     return render_template('index.html', form=form, posts=posts)
   # return render_template('index.html',
