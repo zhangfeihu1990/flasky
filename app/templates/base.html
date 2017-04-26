@@ -24,14 +24,22 @@ data-toggle="collapse" data-target=".navbar-collapse">
 <li><a href="/">Home</a></li>
 </ul>
 
-<!--<ul class="nav navbar-nav navbar-right">-->
-<!--{% if current_user.is_authenticated() %}-->
-<!--<li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>-->
-<!--{% else %}-->
-<!--<li><a href="{{ url_for('auth.login') }}">Sign In</a></li>-->
+<ul class="nav navbar-nav navbar-right">
+{% if current_user.is_authenticated %}
+<li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+{% else %}
+<<li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+{% endif %}
+
+<!--{% if current_user.is_authenticated %}-->
+<!--<li>-->
+<!--<a href="{{ url_for('main.user', username=current_user.username) }}">-->
+<!--Profile-->
+<!--</a>-->
+<!--</li>-->
 <!--{% endif %}-->
 
-<!--</ul>-->
+</ul>-
 
 </div>
 </div>
