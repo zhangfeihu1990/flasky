@@ -10,7 +10,6 @@ from . import main
 from .forms import NameForm, EditProfileForm, PostForm, CommentForm
 from .. import db
 from ..models import User, Permission, Post, Comment
-
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
@@ -52,7 +51,8 @@ def user(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
       abort(404)
-    return render_template('user.html', user=user)
+    posts = user.posts.order_by(Post.timestamp.desc()).all()
+    return render_template('user.html', user=user, posts=posts)
 
 
 #@login_required
@@ -175,3 +175,9 @@ def post(id):
     comments = pagination.items
     return render_template('post.html', posts=[post], form=form,
                            comments=comments, pagination=pagination)
+
+@main.route('/moderator')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def for_moderators_only():
+  return "For comment moderators!"
