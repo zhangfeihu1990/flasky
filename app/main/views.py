@@ -181,3 +181,8 @@ def post(id):
 @permission_required(Permission.MODERATE_COMMENTS)
 def for_moderators_only():
   return "For comment moderators!"
+
+#获取新闻内容
+@main.route('/news/<id>')
+def getNewsContent():
+    pass
